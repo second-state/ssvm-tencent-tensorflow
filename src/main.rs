@@ -33,13 +33,15 @@ fn main() {
     }
     // println!("{} : {}", max_index, max_value as f32 / 255.0);
 
-    let mut confidence = "low";
-    if max_value > 200 {
-        confidence = "very high";
-    } else if max_value > 125 {
-        confidence = "high";
-    } else if max_value > 80 {
-        confidence = "medium";
+    let mut confidence = "could be";
+    if max_value > 0.75 {
+        confidence = "is very likely";
+    } else if max_value > 0.5 {
+        confidence = "is likely";
+    } else if max_value > 0.2 {
+        confidence = "could be";
+    } else {
+        return "It does not appears to be a bird in the picture.".to_string();
     }
 
     let mut label_lines = labels.lines();
