@@ -6,10 +6,6 @@ fn main() {
     let model_data: &[u8] = include_bytes!("lite-model_aiy_vision_classifier_birds_V1_3.tflite");
     let labels = include_str!("aiy_birds_V1_labels.txt");
 
-    /*
-    let mut img_buf = Vec::new();
-    io::stdin().read_to_end(&mut img_buf).unwrap();
-    */
     let mut buffer = String::new();
     io::stdin().read_to_string(&mut buffer).expect("Error reading from STDIN");
     let obj: FaasInput = serde_json::from_str(&buffer).unwrap();
@@ -50,7 +46,10 @@ fn main() {
     for _i in 0..max_index {
       label_lines.next();
     }
-    println!("{} : {}", label_lines.next().unwrap().to_string(), confidence.to_string());
+
+    let class_name = label_lines.next().unwrap().to_string();
+    println!("It {} a <a href='https://www.google.com/search?q={}'>{}</a> in the picture", confidence.to_string(), class_name, class_name);
+    // println!("{} : {}", label_lines.next().unwrap().to_string(), confidence.to_string());
 }
 
 #[derive(Deserialize, Debug)]
