@@ -25,7 +25,7 @@ function callService() {
     $.ajax({
       url: "https://service-aj0plx8u-1302315972.hk.apigw.tencentcs.com/release/my_hk",
       type: "post",
-      data : reader.result,
+      data : reader.result.split("base64,")[1],
       processData: false,
       success: function (data) {
         $('#result').html(data);
