@@ -20,7 +20,7 @@ function callService() {
   reader.readAsDataURL($('#input')[0].files[0]);
 
   reader.onloadend = function () {
-  $.ajax({
+    $.ajax({
       url: "https://service-aj0plx8u-1302315972.hk.apigw.tencentcs.com/release/my_hk",
       type: "post",
       data : reader.result,
@@ -33,8 +33,8 @@ function callService() {
         alert("Rate limit exceeded");
         $('#process').prop('disabled', false);
       }
-  });
-  });
+    });
+  };
 
   return false;
 }
