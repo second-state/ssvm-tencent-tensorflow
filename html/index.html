@@ -48,7 +48,7 @@ function callService() {
         } else {
             msg = 'Uncaught Error.\n' + jqXHR.responseText;
         }
-        alert(msg);
+        $('#result').html(msg);
         $('#process').prop('disabled', false);
       }
     });
