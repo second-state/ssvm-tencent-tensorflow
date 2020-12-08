@@ -1,13 +1,23 @@
 use std::io::{self, Read};
 use ssvm_tensorflow_interface;
+use serde::Deserialize;
 
 fn main() {
     let model_data: &[u8] = include_bytes!("lite-model_aiy_vision_classifier_birds_V1_3.tflite");
     let labels = include_str!("aiy_birds_V1_labels.txt");
 
+    /*
     let mut img_buf = Vec::new();
     io::stdin().read_to_end(&mut img_buf).unwrap();
-    let flat_img = ssvm_tensorflow_interface::load_jpg_image_to_rgb32f(&img_buf, 224, 224);
+    */
+    let mut buffer = String::new();
+    io::stdin().read_to_string(&mut buffer).expect("Error reading from STDIN");
+    let obj: FaasInput = serde_json::from_str(&buffer).unwrap();
+    // println!("{} {}", &(obj.body)[..5], obj.body.len());
+    let img_buf = base64::decode_config(&(obj.body), base64::STANDARD).unwrap();
+    // println!("Image buf size is {}", img_buf.len());
+
+    let flat_img = ssvm_tensorflow_interface::load_jpg_image_to_rgb8(&img_buf, 224, 224);
 
     let mut session = ssvm_tensorflow_interface::Session::new(&model_data, ssvm_tensorflow_interface::ModelType::TensorFlowLite);
     session.add_input("module/hub_input/images_uint8", &flat_img, &[1, 224, 224, 3])
@@ -25,7 +35,7 @@ fn main() {
         }
         i += 1;
     }
-    println!("{} : {}", max_index, max_value as f32 / 255.0);
+    // println!("{} : {}", max_index, max_value as f32 / 255.0);
 
     let mut confidence = "low";
     if max_value > 200 {
@@ -41,4 +51,9 @@ fn main() {
       label_lines.next();
     }
     println!("{} : {}", label_lines.next().unwrap().to_string(), confidence.to_string());
+}
+
+#[derive(Deserialize, Debug)]
+struct FaasInput {
+    body: String
 }
