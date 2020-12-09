@@ -28,3 +28,8 @@ Live test
 $ base64 -w 0 html/bird.jpg | curl -d @- -X POST https://service-aj0plx8u-1302315972.hk.apigw.tencentcs.com/release/my_hk
 $ base64 -w 0 html/PurpleGallinule.jpg | curl -d @- -X POST https://service-aj0plx8u-1302315972.hk.apigw.tencentcs.com/release/my_hk
 ```
+Live demo
+
+Give it a try!
+
+[English](https://second-state.github.io/wasm-learning/tencentcloud/ssvm-tflite/bird/html/index.html) | [中文]（https://second-state.github.io/wasm-learning/tencentcloud/ssvm-tflite/bird/html/index-zh.html）
