@@ -32,4 +32,4 @@ Live demo
 
 Give it a try!
 
-[English](https://second-state.github.io/wasm-learning/tencentcloud/ssvm-tflite/bird/html/index.html) | [中文]（https://second-state.github.io/wasm-learning/tencentcloud/ssvm-tflite/bird/html/index-zh.html）
+[English](https://second-state.github.io/wasm-learning/tencentcloud/ssvm-tflite/bird/html/index.html) | [中文](https://second-state.github.io/wasm-learning/tencentcloud/ssvm-tflite/bird/html/index-zh.html)
